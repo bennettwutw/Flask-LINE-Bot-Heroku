@@ -38,5 +38,9 @@ def handle_message(event):
     #plus
     final = int(f"{get_message}")+5
     # Send To Line
-    reply = TextSendMessage(text=str(final))
-    line_bot_api.reply_message(event.reply_token, reply)
+    if final == int :
+        reply = TextSendMessage(text=str(final))
+        line_bot_api.reply_message(event.reply_token, reply)
+    else :
+        reply = TextSendMessage(text="請輸入數字！")
+        line_bot_api.reply_message(event.reply_token, reply)
