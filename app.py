@@ -38,7 +38,7 @@ def handle_message(event):
     #　運　算　式
     final = int(f"{get_message}")+5
     # Send To Line
-    if int(f"{get_message}") >= 0 :
+    try :
         reply = TextSendMessage(text=str(final))
         line_bot_api.reply_message(event.reply_token, reply)
     except :
