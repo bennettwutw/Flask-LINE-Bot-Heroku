@@ -38,9 +38,9 @@ def handle_message(event):
     #　運　算　式
     final = int(f"{get_message}")+5
     # Send To Line
-    try :
+    if  len(get_message) < 5:
         reply = TextSendMessage(text=str(final))
         line_bot_api.reply_message(event.reply_token, reply)
-    except :
-        reply = TextSendMessage(text="請輸入數字！")
+    else :
+        reply = TextSendMessage(text="太長了！")
         line_bot_api.reply_message(event.reply_token, reply)
