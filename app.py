@@ -41,6 +41,6 @@ def handle_message(event):
     if int(f"{get_message}") >= 0 :
         reply = TextSendMessage(text=str(final))
         line_bot_api.reply_message(event.reply_token, reply)
-    else :
+    except :
         reply = TextSendMessage(text="請輸入數字！")
         line_bot_api.reply_message(event.reply_token, reply)
