@@ -37,5 +37,5 @@ def callback():
     get_message = event.message.text
 
     # Send To Line
-    reply = TextSendMessage(text="")
+    reply = TextSendMessage(text="love")
     line_bot_api.reply_message(event.reply_token, reply)
