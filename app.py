@@ -16,7 +16,7 @@ handler = WebhookHandler(os.environ.get("CHANNEL_SECRET"))
 ##資料匯入##
 import numpy as np
 import pandas as pd
-pd = pd.read_csv("test_data.csv")
+pd = pd.read_csv("./test_data.csv")
 output = pd.iloc[0, 3]
 ##
 
