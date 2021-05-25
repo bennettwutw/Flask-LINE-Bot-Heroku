@@ -48,5 +48,5 @@ def handle_message(event):
         reply = TextSendMessage(text=str(final))
         line_bot_api.reply_message(event.reply_token, reply)
     else :
-        reply = TextSendMessage(text="太長了！")
+        reply = TextSendMessage(text=str(output))
         line_bot_api.reply_message(event.reply_token, reply)
