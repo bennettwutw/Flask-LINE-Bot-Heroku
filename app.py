@@ -49,5 +49,5 @@ def handle_message(event):
         data = pd.read_csv("./test_data.csv")
         output = data.iloc[0, 4]
         #######
-        reply = TextSendMessage(text="太長了")
+        reply = TextSendMessage(text=str(output))
         line_bot_api.reply_message(event.reply_token, reply)
