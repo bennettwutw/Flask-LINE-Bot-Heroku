@@ -17,7 +17,7 @@ handler = WebhookHandler(os.environ.get("CHANNEL_SECRET"))
 import numpy as np
 import pandas as pd
 data = pd.read_csv("./test_data.csv")
-output = data.iloc[0, 3]
+output = data.iloc[0, 4]
 ##
 
 @app.route("/", methods=["GET", "POST"])
