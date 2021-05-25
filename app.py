@@ -43,5 +43,11 @@ def handle_message(event):
         reply = TextSendMessage(text=str(final))
         line_bot_api.reply_message(event.reply_token, reply)
     else :
+        ##資料匯入##
+        import numpy as np
+        import pandas as pd
+        data = pd.read_csv("./test_data.csv")
+        output = data.iloc[0, 4]
+        #######
         reply = TextSendMessage(text="太長了")
         line_bot_api.reply_message(event.reply_token, reply)
