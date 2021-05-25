@@ -46,7 +46,16 @@ def handle_message(event):
         ##資料匯入##
         import numpy as np
         import pandas as pd
-        data = pd.read_csv("./test_data.csv")
+        data = pd.DataFrame(
+    {"name":["前田敦子", "大島優子", "篠田麻里子", "渡邊麻友", 
+             "高橋南", "小嶋陽菜", "板野友美"],
+     "生日":["1991-7-10", "1988-10-17", "1986-3-11", 
+                 "1994-3-26", "1991-4-8", 
+                 "1988-4-19", "1991-7-3"],
+     "結婚":[True, False, True, False, 
+                 False, False, False],
+     "身高":[161, 152, 168, 156, 148, np.nan, 154],
+     "組別":["A", "K", "A", "B", "A", "A", "K"]})
         output = data.iloc[0, 4]
         #######
         reply = TextSendMessage(text=str(output))
