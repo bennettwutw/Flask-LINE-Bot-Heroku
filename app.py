@@ -77,6 +77,6 @@ def handle_message(event):
         else:
             continue
     average = money / count
-    reply = TextSendMessage(text=str(average))
+    reply = TextSendMessage(text="該路段房價約為"+str(int(average))+"元／每平方公尺")
     line_bot_api.reply_message(event.reply_token, reply)
 
