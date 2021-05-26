@@ -34,14 +34,13 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    get_message = event.message.text
+    get_message = event.message.text    
     
-    #縣市對應代碼
     city_dic = {"基隆市":"c", "臺北市":"a", "新北市":"f", "桃園市":"h", "新竹市":"o", "新竹縣":"j", "苗栗縣":"k", "臺中市":"b", "南投縣":"m", 
                "彰化縣":"n", "雲林縣":"p", "嘉義市":"i", "嘉義縣":"q", "臺南市":"d", "高雄市":"e", "屏東縣":"t", "宜蘭縣":"g", "花蓮縣":"u", 
                 "臺東縣":"v", "澎湖縣":"x", "金門縣":"w", "連江縣":"z"}
-    if get_message[0:2] in city_dic:
-        csv_name = city_dic[get_message[0:2]]+"_lvr_land_a.csv"
+    if get_message[0:3] in city_dic:
+        csv_name = city_dic[get_message[0:3]]+"_lvr_land_a.csv"
     
     #讀取CSV
     years = ["real_estate1071","real_estate1072","real_estate1073","real_estate1074","real_estate1081","real_estate1082","real_estate1083",
@@ -54,14 +53,20 @@ def handle_message(event):
     import csv
     #建立該縣市各年度資料字典
     for year in years:
-        with open('./data/'+'year/'+csv_name , newline='') as csvfile:
+        with open('./data/'+year+'/'+csv_name , newline='') as csvfile:
             rows = csv.reader(csvfile)
             for row in rows:
                 if row[2] not in temp_dict: 
-                    temp_dict[row[2]] = int(row[22])
+                    try:
+                        temp_dict[row[2]] = int(row[22])
+                    except:
+                        continue
                 else:
-                    temp_dict[row[2]+"_"+str(num)] = int(row[22])
-                    num += 1
+                    try:
+                        temp_dict[row[2]+"_"+str(num)] = int(row[22])
+                        num += 1
+                    except:
+                        continue
     #針對輸入資料解析
     count = 0 #可用資料筆數
     money = 0 #金額總數
