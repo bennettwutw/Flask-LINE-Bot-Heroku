@@ -54,7 +54,7 @@ def handle_message(event):
     import csv
     #建立該縣市各年度資料字典
     for year in years:
-        with open('./data/'+csv_name , newline='') as csvfile:
+        with open('./data/'+'year/'+csv_name , newline='') as csvfile:
             rows = csv.reader(csvfile)
             for row in rows:
                 if row[2] not in temp_dict: 
