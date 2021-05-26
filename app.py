@@ -78,5 +78,5 @@ def handle_message(event):
             continue
     average = money / count
     reply = TextSendMessage(text=str(average))
-        line_bot_api.reply_message(event.reply_token, reply)
+    line_bot_api.reply_message(event.reply_token, reply)
 
