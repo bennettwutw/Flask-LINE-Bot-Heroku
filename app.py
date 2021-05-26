@@ -36,18 +36,42 @@ def callback():
 def handle_message(event):
     get_message = event.message.text
     
-    #　運　算　式
-    final = int(f"{get_message}")+5
-    # Send To Line
-    if  len(get_message) < 5:
-        reply = TextSendMessage(text=str(final))
+    #縣市對應代碼
+    city_dic = {"基隆市":"c", "臺北市":"a", "新北市":"f", "桃園市":"h", "新竹市":"o", "新竹縣":"j", "苗栗縣":"k", "臺中市":"b", "南投縣":"m", 
+               "彰化縣":"n", "雲林縣":"p", "嘉義市":"i", "嘉義縣":"q", "臺南市":"d", "高雄市":"e", "屏東縣":"t", "宜蘭縣":"g", "花蓮縣":"u", 
+                "臺東縣":"v", "澎湖縣":"x", "金門縣":"w", "連江縣":"z"}
+    if get_message[0:2] in city_dic:
+        csv_name = city_dic[get_message[0:2]]+"_lvr_land_a.csv"
+    
+    #讀取CSV
+    years = ["real_estate1071","real_estate1072","real_estate1073","real_estate1074","real_estate1081","real_estate1082","real_estate1083",
+             "real_estate1084","real_estate1091","real_estate1092","real_estate1093"]
+    #暫存字典
+    temp_dict = {}
+    #後面數字
+    num = 0
+    import os
+    import csv
+    #建立該縣市各年度資料字典
+    for year in years:
+        with open('./data/'+csv_name , newline='') as csvfile:
+            rows = csv.reader(csvfile)
+            for row in rows:
+                if row[2] not in temp_dict: 
+                    temp_dict[row[2]] = int(row[22])
+                else:
+                    temp_dict[row[2]+"_"+str(num)] = int(row[22])
+                    num += 1
+    #針對輸入資料解析
+    count = 0 #可用資料筆數
+    money = 0 #金額總數
+    for data in temp_dict:
+        if get_message in data:
+            count += 1
+            money += int(temp_dict[data])
+        else:
+            continue
+    average = money / count
+    reply = TextSendMessage(text=str(average))
         line_bot_api.reply_message(event.reply_token, reply)
-    else :
-        ##資料匯入##
-        import numpy as np
-        import pandas as pd
-        data = pd.read_csv("./test_data.csv")
-        output = data.iloc[1, 4]
-        #######
-        reply = TextSendMessage(text=str(output))
-        line_bot_api.reply_message(event.reply_token, reply)
+
