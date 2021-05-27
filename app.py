@@ -44,7 +44,7 @@ def handle_message(event):
     else:
         reply = TextSendMessage(text="系統查無該縣市資料，請再確認。") 
         line_bot_api.reply_message(event.reply_token, reply)
-        break
+        #break
     #讀取CSV
     years = ["real_estate1071","real_estate1072","real_estate1073","real_estate1074","real_estate1081","real_estate1082","real_estate1083",
              "real_estate1084","real_estate1091","real_estate1092","real_estate1093"]
@@ -89,7 +89,7 @@ def handle_message(event):
     else:
         reply = TextSendMessage(text="您輸入的地址有誤或尚未開放查詢，請再確認。") 
         line_bot_api.reply_message(event.reply_token, reply)
-        break
+        #break
 #只要路名相同的門牌都列入，抓取其單價
 
     target = road_address[0]
@@ -107,7 +107,7 @@ def handle_message(event):
     if object_number < 3:
         reply = TextSendMessage(text="查無相關房價或資料筆數不足3筆。") 
         line_bot_api.reply_message(event.reply_token, reply)
-        quit()
+        #break
     
     sorted_price = sorted(price)
     average = sum(sorted_price[exclude:(object_number - exclude)]) / (object_number - 2*exclude)
