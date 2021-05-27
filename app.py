@@ -96,7 +96,7 @@ def handle_message(event):
     price = []
 
     for key in temp_dict:
-        if key[0:len(target)] = target:
+        if key[0:len(target)] == target:
             price.append(temp_dict[key])
 
 #排除上下10%  #比例可再調整
@@ -104,6 +104,11 @@ def handle_message(event):
     object_number = len(price)
     exclude = object_number // 10
 
+    if object_number < 3:
+        reply = TextSendMessage(text="查無相關房價或資料筆數不足3筆。") 
+        line_bot_api.reply_message(event.reply_token, reply)
+        quit()
+    
     sorted_price = sorted(price)
     average = sum(sorted_price[exclude:(object_number - exclude)]) / (object_number - 2*exclude)
     average_pin = int(average*3.3058)   #把平均單價轉成以每坪表示
@@ -113,5 +118,5 @@ def handle_message(event):
         reply = TextSendMessage(text="查無相關房價。") 
         line_bot_api.reply_message(event.reply_token, reply)
     else:  
-        reply = TextSendMessage(text="target + '的平均價格為每坪' + average + '元。'")   
+        reply = TextSendMessage(text=str(target) + '的平均價格為每坪' + str(average_pin) + '元。')   
         line_bot_api.reply_message(event.reply_token, reply)
