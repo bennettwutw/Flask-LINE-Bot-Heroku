@@ -112,11 +112,6 @@ def handle_message(event):
     sorted_price = sorted(price)
     average = sum(sorted_price[exclude:(object_number - exclude)]) / (object_number - 2*exclude)
     average_pin = int(average*3.3058)   #把平均單價轉成以每坪表示
-
-
-    if object_number < 1:
-        reply = TextSendMessage(text="查無相關房價。") 
-        line_bot_api.reply_message(event.reply_token, reply)
-    else:  
-        reply = TextSendMessage(text=str(target) + '的平均價格為每坪' + str(average_pin) + '元。')   
-        line_bot_api.reply_message(event.reply_token, reply)
+  
+    reply = TextSendMessage(text=str(target) + '的平均價格為每坪' + str(average_pin) + '元。')   
+    line_bot_api.reply_message(event.reply_token, reply)
