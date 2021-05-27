@@ -95,9 +95,9 @@ def handle_message(event):
     target = road_address[0]
     price = []
 
-    for key in temp_dic:
+    for key in temp_dict:
         if key[0:len(target)] = target:
-            price.append(temp_dic[key])
+            price.append(temp_dict[key])
 
 #排除上下10%  #比例可再調整
 
