@@ -76,6 +76,29 @@ def handle_message(event):
                     except:
                         continue
 #########
+#讀入1094、1101
+
+    #讀取CSV
+    years_2 = ["real_estate1094","real_estate1101"]
+
+    #建立該縣市各年度資料字典
+    for year in years_2:
+        with open('./data/'+year+'/'+csv_name , newline='') as csvfile:
+            rows = csv.reader(csvfile)
+            for row in rows:
+                new_row_2 = get_message[0:3] + row[0] + row[2]
+                if new_row_2 not in temp_dict: 
+                    try:
+                        temp_dict[new_row_2 ] = int(row[22])
+                    except:
+                        continue
+                else:
+                    try:
+                        temp_dict[new_row_2 +"_"+str(num)] = int(row[22])
+                        num += 1
+                    except:
+                        continue
+#########
     
     input_address = get_message
 
