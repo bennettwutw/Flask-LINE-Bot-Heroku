@@ -34,7 +34,12 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    
     get_message = event.message.text    
+    
+    trans_dic = {"台北市":"臺北市", "台中市":"臺中市", "台南市":"臺南市", "台東縣":"臺東縣"}
+    if get_message[0:3] in trans_dic:
+        get_message = trans_dic[get_message[0:3]]+get_message[3:]    
     
     city_dic = {"基隆市":"c", "臺北市":"a", "新北市":"f", "桃園市":"h", "新竹市":"o", "新竹縣":"j", "苗栗縣":"k", "臺中市":"b", "南投縣":"m", 
                "彰化縣":"n", "雲林縣":"p", "嘉義市":"i", "嘉義縣":"q", "臺南市":"d", "高雄市":"e", "屏東縣":"t", "宜蘭縣":"g", "花蓮縣":"u", 
@@ -112,6 +117,8 @@ def handle_message(event):
     sorted_price = sorted(price)
     average = sum(sorted_price[exclude:(object_number - exclude)]) / (object_number - 2*exclude)
     average_pin = int(average*3.3058)   #把平均單價轉成以每坪表示
+    average_w = average_pin // 10000
+    average_d = average_pin % 10000
   
-    reply = TextSendMessage(text=str(target) + '的平均價格為每坪' + str(average_pin) + '元。')   
+    reply = TextSendMessage(text= '自2018年以來，' + str(target) + '的平均價格為每坪' + str(average_w) + '萬' + str(average_d) + '元。')   
     line_bot_api.reply_message(event.reply_token, reply)
