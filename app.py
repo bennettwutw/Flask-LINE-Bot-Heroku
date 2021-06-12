@@ -51,7 +51,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, reply)
         #break
     #讀取CSV
-    years = ["real_estate1071","real_estate1072","real_estate1073","real_estate1074","real_estate1081","real_estate1082","real_estate1083",
+    years = ["real_estate1072","real_estate1073","real_estate1074","real_estate1081","real_estate1082","real_estate1083",
              "real_estate1084","real_estate1091","real_estate1092","real_estate1093"]
     #暫存字典
     temp_dict = {}
@@ -143,5 +143,5 @@ def handle_message(event):
     average_w = average_pin // 10000
     average_d = average_pin % 10000
   
-    reply = TextSendMessage(text= '自2018年以來，' + str(target) + '的平均價格為每坪' + str(average_w) + '萬' + str(average_d) + '元。')   
+    reply = TextSendMessage(text= '過去三年' + str(target) + '的平均價格為每坪' + str(average_w) + '萬' + str(average_d) + '元。')   
     line_bot_api.reply_message(event.reply_token, reply)
